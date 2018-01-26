@@ -55,10 +55,16 @@ public class HomeController {
 		return "accessDenied";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/userpage", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('ROLE_USER')")
+	public String pageForUser() {
+		return "userPage";
+	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/adminpage", method = RequestMethod.GET)
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public String pageForAdmin(ModelMap model) {
 		model.addAttribute("user", principalService.getPrincipal());
 		return "adminPage";

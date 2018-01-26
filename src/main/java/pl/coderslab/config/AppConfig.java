@@ -14,11 +14,11 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-//http://www.programming-free.com/2016/01/spring-security-spring-data-jpa.html
+
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = { "pl.coderslab.repository" })
+@EnableJpaRepositories(basePackages = "pl.coderslab.repository", entityManagerFactoryRef = "entityManager")
 @ComponentScan(basePackages = { "pl.coderslab" })
 public class AppConfig extends WebMvcConfigurerAdapter {
 	@Bean
@@ -35,7 +35,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 	}
 
 	@Bean
-	public LocalEntityManagerFactoryBean entityManagerFactory() {
+	public LocalEntityManagerFactoryBean entityManager() {
 		LocalEntityManagerFactoryBean emfb = new LocalEntityManagerFactoryBean();
 		emfb.setPersistenceUnitName("taskcl");
 		return emfb;
